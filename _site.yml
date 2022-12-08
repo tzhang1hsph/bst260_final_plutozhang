@@ -6,4 +6,4 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "BST260FinalProj"
-      href: fpEDA.html
+      href: finalproj.html
