@@ -38,7 +38,7 @@ library(caret)
 library(ggplot2)
 library(ggrepel)
 library(plm)
-
+library(knitr)
 
 ```
 
@@ -69,6 +69,9 @@ length(unique(happy21$Country)) == nrow(happy21)
 
 ```
 
+# EDA: 
+Looking at the summary table of the 2021 data: 
+
 
 ```{r}
 #EDA
@@ -76,7 +79,7 @@ length(unique(happy21$Country)) == nrow(happy21)
 
 eda21 <- happy21 |> group_by(Region) |> summarize(happyavg = mean(Happy)) |> arrange(happyavg)
 
-print(eda21)
+kable(eda21)
 happy21 |> ggplot() + geom_histogram(aes(x=Happy), bins=40)
 ```
 
@@ -86,6 +89,7 @@ From the summary histogram, the happiness scores are approximately normally dist
 The region with the highest happiness score are North America and Western Europe. 
 
 
+Now look at a summary table of the 2020 data: 
 
 ```{r}
 #Now preprocess the 2020 happiness data:
@@ -103,7 +107,7 @@ colnames(happy20) <- c('Country', 'Region','Happy', 'LogGDP','Support','HLE','Fr
 
 region20<- happy20 |> group_by(Region) |> summarize(happyavg = mean(Happy)) |> arrange(happyavg)
 
-print(region20)
+kable(region20)
 happy20 |> ggplot() + geom_histogram(aes(x=Happy), bins=40)
 
 ```
@@ -555,7 +559,7 @@ ggplot(thismap, aes(long, lat, fill = fill, group=group)) +
 ```
 
 ```{r}
-print(region21alltibble)
+kable(region21alltibble)
 ```
 
 By looking at the social factors data of 2021, the first and second clusters, Sub-Saharan Africa and South Asia, have the lowest happiness score values, with relatively low GDP, Health life expectancy and Social Support, but relatively high or average in other wellness indicators. This explains why South Asia is separated from the cluster with other regions for the k-means clustering approach, because k-means clustering is better in ruling out clusters with different sizes as compared to hierarchical clustering. so despite South Asia is similar in other regions in terms of generosity and corrup scores, it is still singled out as a cluster with low happiness score, using k-means approach. 
